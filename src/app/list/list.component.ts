@@ -40,13 +40,14 @@ import { NzPopoverDirective } from "ng-zorro-antd/popover";
 })
 export class ListComponent implements OnInit {
 
-  data = data;
+  data: DataInterface[] = [];
   customColumn = customColumn;
 
   filteredData: DataInterface[] = [...this.data];
   paginatedData: DataInterface[] = [];
 
   filtersVisible = false;
+  loadingData = false;
 
   filterCriteria: Record<string, string> = {};
 
@@ -54,7 +55,50 @@ export class ListComponent implements OnInit {
   pageSize = 10;
 
   ngOnInit(): void {
-    this.updatePaginatedData();
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.loadingData = true;
+    setTimeout(() => {
+      this.data = [
+        {
+          id: '5fe1933e71260abb214c869e',
+          isActive: false,
+          balance: '$1,942.91',
+          picture: 'http://placehold.it/32x32',
+          age: 30,
+          name: {
+            first: 'Candice',
+            last: 'Mack',
+          },
+          company: 'COMBOGENE',
+          email: 'candice.mack@combogene.info',
+          address: '491 Pine Street, Wawona, Oklahoma, 2443',
+          tags: ['fugiat', 'duis', 'nisi', 'veniam', 'officia'],
+          favoriteFruit: 'apple',
+        },
+        {
+          id: '5fe1933e5f049e9dcb034095',
+          isActive: true,
+          balance: '$3,203.94',
+          picture: 'http://placehold.it/32x32',
+          age: 32,
+          name: {
+            first: 'Avis',
+            last: 'Buchanan',
+          },
+          company: 'MANTRIX',
+          email: 'avis.buchanan@mantrix.tv',
+          address: '468 Howard Avenue, Cherokee, Missouri, 2714',
+          tags: ['ea', 'anim', 'proident', 'aliqua', 'est'],
+          favoriteFruit: 'banana',
+        },
+      ];
+      this.filteredData = [...this.data];
+      this.updatePaginatedData();
+      this.loadingData = false;
+    }, 1000);
   }
 
   get scrollX(): string {

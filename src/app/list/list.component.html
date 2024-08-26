@@ -20,6 +20,7 @@
           <div class="col-12">
             <nz-table
               #filterTable
+              [nzLoading]="loadingData"
               [nzData]="paginatedData"
               [nzPageSize]="pageSize"
               [nzShowPagination]="false"
